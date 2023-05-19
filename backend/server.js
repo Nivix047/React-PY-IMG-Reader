@@ -11,13 +11,16 @@ app.use(cors());
 app.use(bodyParser.json());
 const upload = multer({ dest: "uploads/" });
 
+// Configure Cloudinary
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
   api_secret: process.env.CLOUDINARY_SECRET,
 });
 
+// POST /upload route
 app.post("/upload", upload.single("file"), async (req, res) => {
+  // File upload handler
   try {
     if (!req.file) {
       console.error("No file received in the request.");
@@ -62,4 +65,5 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   }
 });
 
+// Start server
 app.listen(5001, () => console.log("Server started on port 5001"));

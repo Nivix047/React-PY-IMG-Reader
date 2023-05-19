@@ -13,7 +13,7 @@ pytesseract.pytesseract.tesseract_cmd = r'/opt/homebrew/bin/tesseract'
 def summarize_text(text):
     """
     This function receives a text string, uses the OpenAI GPT-3.5 Turbo model to summarize it,
-    and returns the generated summary.
+    and returns the generated summary. Labeled as: Text summarization function
 
     :param text: str, The text to summarize
     :return: str, The generated summary
@@ -32,6 +32,7 @@ def summarize_text(text):
     return completion.choices[0].message.content
 
 
+# Function to extract text from image
 def extract_text_from_image(url):
     response = requests.get(url)
     img = Image.open(BytesIO(response.content))
@@ -39,11 +40,12 @@ def extract_text_from_image(url):
     return text
 
 
+# Main execution
 if __name__ == "__main__":
     try:
         url = sys.stdin.read().strip()
-        text = extract_text_from_image(url)
-        summary = summarize_text(text)
+        text = extract_text_from_image(url)  # Extract text from image
+        summary = summarize_text(text)  # Summarize extracted text
         print(summary)
     except Exception as e:
         print(f"An error occurred: {e}", file=sys.stderr)

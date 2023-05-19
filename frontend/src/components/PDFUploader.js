@@ -5,10 +5,12 @@ const PDFUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [summary, setSummary] = useState("");
 
+  // Handler function for file input change event
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
 
+  // Function to upload PDF file
   const uploadPDF = async () => {
     if (!selectedFile) {
       console.error("No file selected for upload.");
@@ -30,6 +32,7 @@ const PDFUploader = () => {
     setSummary(res.data.summary);
   };
 
+  // Render function
   return (
     <div>
       <input
